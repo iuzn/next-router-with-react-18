@@ -1,22 +1,23 @@
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import {useEffect, useState} from "react";
 
 export default function Home() {
  const router = useRouter()
     console.log(router.isReady)
-    const [hasMounted, setHasMounted] = useState(false)
     const [isReady, setIsReady] = useState(null)
+    const [hasMounted, setHasMounted] = useState(false)
+
+    // Blocking hydration warning for SSR
     useEffect(() => {
         setIsReady(router.isReady)
     }, [router.isReady])
     useEffect(() => {
         setHasMounted(true)
     }, [])
-
     if (!hasMounted) {
         return null
     }
+
   return (
       <div>
        <span>
