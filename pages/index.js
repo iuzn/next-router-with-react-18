@@ -4,13 +4,15 @@ import {useEffect, useState} from "react";
 export default function Home() {
  const router = useRouter()
     console.log(router.isReady)
-    const [isReady, setIsReady] = useState(null)
+    const [isReady, setIsReady] = useState(router.isReady)
     const [hasMounted, setHasMounted] = useState(false)
 
-    // Blocking hydration warning for SSR
+    // Set router.isReady when the page has mounted
     useEffect(() => {
         setIsReady(router.isReady)
-    }, [router.isReady])
+    }, [router])
+
+    // Blocking hydration warning
     useEffect(() => {
         setHasMounted(true)
     }, [])
